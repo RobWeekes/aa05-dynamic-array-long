@@ -28,7 +28,7 @@ class DynamicArray {
   unshift(val) {
       if(this.length === this.capacity) this.resize();
       // shift all the values to the right
-      for(let i = 0; i < this.length + 1; i++) {
+      for(let i = this.length + 1; i >= 0; i--) {
           this.data[i + 1] = this.data[i];
       }
       this.data[0] = val;
@@ -90,21 +90,23 @@ console.log(array);
 // console.log(array.length);
 // console.log(array.pop());
 
-// array.unshift(1);
-// console.log(array.length); // 1
-// console.log(array.read(0)); // 1
-// console.log(array.read(1)); // 1
+array.unshift(1);
+console.log(array.length); // 1
+console.log(array.read(0)); // 1
+console.log(array.read(1)); // undefined
 
-// array.unshift(2);
-// console.log(array.length); // 2
-// console.log(array.read(0)); // 2
-// console.log(array.read(1)); // 1
+array.unshift(2);
+console.log(array.length); // 2
+console.log(array.read(0)); // 2
+console.log(array.read(1)); // 1
+console.log(array.read(2)); // undefined
 
-// array.unshift(3);
-// console.log(array.length); // 3
-// console.log(array.read(0)); // 3
-// console.log(array.read(1)); // 2
-// console.log(array.read(2)); // 1   ???
+array.unshift(3);
+console.log(array.length); // 3
+console.log(array.read(0)); // 3
+console.log(array.read(1)); // 2
+console.log(array.read(2)); // 1 was getting 2 until I looped backwards!
+console.log(array.read(3)); // undefined
 
 // array.push(10);
 // array.push(11);
@@ -112,6 +114,7 @@ console.log(array);
 // array.push(12);
 // array.push(13);
 // console.log(array.length) // 4;
+// console.log(array.data.length) // 4
 // array.resize();
 // console.log(array.capacity) // 8;
 // console.log(array.data.length) // 8;
@@ -126,20 +129,31 @@ array.push(10);
 array.push(11);
 array.push(12);
 array.push(13);
+
+console.log(array.length) // actual length with values -- 4
+console.log(array.capacity) // 4
+console.log(array.data.length) // 4
+
 array.push(14);
 
-console.log(array.capacity) //(8);
-console.log(array.data.length) // (8);
-console.log(array.length) //(5);
+console.log(array.length) // 5
+console.log(array.capacity) // 8
+console.log(array.data.length) // 8
 
 array.unshift(9);
 array.unshift(8);
+console.log(array.length) // 7
+console.log(array.data.length) // 8
+
 array.unshift(7);
+console.log(array.length) // 7
+console.log(array.data.length) // 8
+
 array.unshift(6);
 
-console.log(array.capacity) //(16);
-console.log(array.data.length) // (16);
-console.log(array.length) // (9);
+console.log(array.capacity) // 16
+console.log(array.data.length) // 16
+console.log(array.length) // 9
 
 console.log(array)
 
